@@ -1,12 +1,8 @@
 import { Hono } from "hono";
-import type { Context } from "hono";
+import { getHome } from "./routes.ts";
 
 const app = new Hono();
 
-app.get("/", (c: Context) => {
-  c.header("X-Powered-By", "Deno + Hono");
-  c.status(200);
-  return c.text("ABCD");
-});
+app.get("/", getHome);
 
 Deno.serve({ port: 3000 }, app.fetch);
